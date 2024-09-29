@@ -1,0 +1,48 @@
+					Mise en place d'un serveur nginx avec mysql
+
+Ce projet est hébérgé dans une instance EC2 d'amazon aws
+On a utilisé une connexion ssh avec putty pour la configuration
+On a utilisé l'outil winscp pour transférer les fichiers du projet vers l'instance
+(vous trouvez le fichier du clé publique dans le dossier du projet)
+
+installation de nginx:
+
+sudo apt update
+sudo apt install nginx // installation
+sudo systemctl start nginx // activation du servive nginx
+sudo systemctl enable nginx // activation a chaque démarrage du système
+sudo nano /etc/nginx/sites-available/default // configuration du fichier webserver nginx
+(ouvrir le fichier default avec notepad)
+nginx -t // complation et vérification du synatx du fichier
+sudo systemctl restart nginx // un restart est obligatoire après un modification
+http://3.86.27.172    //bienvenu dans nginx
+
+
+
+
+
+installation de mysql:
+
+sudo apt install mysql-server // installation de mysql
+sudo apt install php-fpm php-mysql // instalation de php-fpm pour mysql
+sudo mysql // création d'un compte pour local mysql
+ALTER USER 'root'@'localhost' IDENTIFIED BY oussama.2000;
+GRANT ALL PRIVILEGES ON * . * TO 'oussama'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILIGES
+quit
+
+
+
+
+installation de phpmyadmin
+
+sudo apt install phpmyadmin //installation de phpmyadmin pour l'interface de mysql
+cd /var/www/html
+sudo ln -s /usr/share/phpmyadmin /var/www/html // création d'un lien symbolique afin de faire le rendu de phpmyadmin dans le serveur web nginx
+ls
+http://3.86.27.172/phpmyadmin      //maintenant phpmyadmin se lance (on importe notre base de données)
+
+
+
+Aprés le développement du site web on peut l'accéder a partir du lien suivant:
+http://3.86.27.172/flashcourses/pages/index.php
